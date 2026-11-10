@@ -1,0 +1,49 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site, operador } from '../site';
+---
+
+<Layout titulo="Inicio" titular={site.marca} descripcion={site.descripcion} intro={site.descripcion}>
+  <h2 class="ancha">Servicios</h2>
+  {
+    site.servicios.map((s, i) => (
+      <section class="fila">
+        <h3>
+          <span class="numero">{String(i + 1).padStart(2, '0')}</span> {s.nombre}
+        </h3>
+        <p>{s.detalle}</p>
+      </section>
+    ))
+  }
+  <section class="fila">
+    <h3>Cotización</h3>
+    <p>
+      Cada proyecto se cotiza según su alcance. La cotización no tiene costo.
+      <a href="/contacto/">Solicitar cotización</a>.
+    </p>
+  </section>
+
+  <h2 class="ancha">Quién está detrás</h2>
+  <section class="fila">
+    <h3>{site.nombreLegal}</h3>
+    <p>
+      {operador}, persona física con actividad empresarial en México. Los datos de contacto y el
+      domicilio están en la página de <a href="/contacto/">contacto</a>.
+    </p>
+  </section>
+</Layout>
+
+<style>
+  h2 {
+    border-top: 0;
+  }
+  h3 {
+    font-size: 1.125rem;
+    letter-spacing: -0.02em;
+  }
+  .numero {
+    margin-right: 0.5rem;
+    color: var(--tenue);
+    font-weight: 400;
+  }
+</style>

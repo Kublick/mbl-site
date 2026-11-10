@@ -1,0 +1,44 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site, operador } from '../site';
+
+const asunto = encodeURIComponent('Eliminación de datos');
+---
+
+<Layout
+  titulo="Eliminación de datos"
+  descripcion={`Cómo solicitar la eliminación de sus datos personales en ${site.marca}.`}
+>
+  <p>
+    Puede pedir que {operador} elimine los datos personales que tiene sobre usted, incluidos los
+    recibidos a través de Facebook, Instagram o WhatsApp.
+  </p>
+
+  <h2>Cómo solicitarlo</h2>
+  <ol>
+    <li>
+      Envíe un correo a
+      <a href={`mailto:${site.correo}?subject=${asunto}`}>{site.correo}</a> con el asunto
+      «Eliminación de datos».
+    </li>
+    <li>
+      Incluya su nombre completo y el teléfono, correo o cuenta con la que se comunicó
+      con {site.marca}, para poder localizar sus datos.
+    </li>
+    <li>Indique si desea eliminar todos sus datos o solo una parte.</li>
+  </ol>
+
+  <h2>Qué sucede después</h2>
+  <ul>
+    <li>Se confirma la recepción de su solicitud en un máximo de 5 días hábiles.</li>
+    <li>Los datos se eliminan en un máximo de 20 días hábiles y se le avisa por el mismo medio.</li>
+    <li>
+      Se conservan únicamente los datos que la ley obliga a guardar, como los comprobantes fiscales,
+      durante el plazo legal.
+    </li>
+  </ul>
+
+  <p>
+    Más información en el <a href="/privacidad/">Aviso de privacidad</a>.
+  </p>
+</Layout>

@@ -1,0 +1,46 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site } from '../site';
+---
+
+<Layout titulo="Contacto" descripcion={`Datos de contacto de ${site.marca}.`}>
+  <dl class="ancha">
+    <div class="fila">
+      <dt>Nombre comercial</dt>
+      <dd>{site.marca}</dd>
+    </div>
+    <div class="fila">
+      <dt>Nombre legal</dt>
+      <dd>{site.nombreLegal}</dd>
+    </div>
+    <div class="fila">
+      <dt>Domicilio</dt>
+      <dd>{site.domicilio}</dd>
+    </div>
+    <div class="fila">
+      <dt>Teléfono</dt>
+      <dd><a href={site.telefonoHref}>{site.telefono}</a></dd>
+    </div>
+    <div class="fila">
+      <dt>Correo</dt>
+      <dd><a href={`mailto:${site.correo}`}>{site.correo}</a></dd>
+    </div>
+  </dl>
+</Layout>
+
+<style>
+  dl {
+    margin-top: 3rem;
+  }
+  .fila:first-child {
+    border-top: 0;
+  }
+  dt {
+    color: var(--tenue);
+  }
+  dd {
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+</style>

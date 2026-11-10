@@ -1,0 +1,291 @@
+---
+import { site, operador, paginas } from '../site';
+
+interface Props {
+  titulo: string;
+  descripcion: string;
+  /** Texto del encabezado gigante; por defecto, el título. */
+  titular?: string;
+  /** Frase central entre corchetes bajo el encabezado. */
+  intro?: string;
+}
+const { titulo, descripcion, titular = titulo, intro } = Astro.props;
+const actual = Astro.url.pathname;
+const menu = paginas.filter((p) => p.href !== '/contacto/');
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{`${titulo} | ${site.marca}`}</title>
+    <meta name="description" content={descripcion} />
+    {
+      site.metaDomainVerification && (
+        <meta name="facebook-domain-verification" content={site.metaDomainVerification} />
+      )
+    }
+  </head>
+  <body>
+    <a class="saltar" href="#contenido">Saltar al contenido</a>
+    <header class="ancho">
+      <a class="marca" href="/">{site.marca}</a>
+      <nav aria-label="Principal">
+        <ul>
+          {
+            menu.map((p) => (
+              <li>
+                <a href={p.href} aria-current={actual === p.href ? 'page' : undefined}>
+                  {p.titulo}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+      <a class="boton" href="/contacto/" aria-current={actual === '/contacto/' ? 'page' : undefined}>
+        Contacto
+      </a>
+    </header>
+
+    <main id="contenido" class="ancho">
+      <h1 class="titular">{titular}</h1>
+      <div class="regla" aria-hidden="true">
+        <span>{site.marca}</span>
+        <span>{new Date().getFullYear()}</span>
+      </div>
+      {intro && <p class="intro">{intro}</p>}
+      <slot />
+    </main>
+
+    <footer>
+      <div class="ancho">
+        <div class="cierre">
+          <div>
+            <p class="pregunta">¿Tiene un proyecto en mente?</p>
+            <a class="boton claro" href="/contacto/">Solicitar cotización</a>
+          </div>
+          <a class="correo" href={`mailto:${site.correo}`}>{site.correo} <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="columnas">
+          <ul>
+            {paginas.map((p) => <li><a href={p.href}>{p.titulo}</a></li>)}
+          </ul>
+          <address>
+            <strong>{operador}</strong><br />
+            {site.domicilio}<br />
+            Teléfono: <a href={site.telefonoHref}>{site.telefono}</a><br />
+            Correo: <a href={`mailto:${site.correo}`}>{site.correo}</a>
+          </address>
+        </div>
+        <p class="rotulo" aria-hidden="true">{site.marca}</p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --fondo: #fbfbfb;
+    --texto: #050505;
+    --tenue: #585959;
+    --tenue-oscuro: #c2bdbd;
+    --borde: #d9d6d6;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    background: var(--fondo);
+    color: var(--texto);
+    font: 1rem/1.6 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+  a {
+    color: inherit;
+  }
+  .ancho {
+    max-width: 72rem;
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 4vw, 3rem);
+  }
+  .saltar {
+    position: absolute;
+    left: -999rem;
+  }
+  .saltar:focus {
+    position: static;
+  }
+
+  header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem 1.5rem;
+    padding-block: 1.25rem;
+    font-size: 0.875rem;
+  }
+  .marca {
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+  }
+  nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  nav a {
+    text-decoration: none;
+  }
+  nav a:hover,
+  nav a[aria-current='page'] {
+    text-decoration: underline;
+    text-underline-offset: 0.3em;
+  }
+  .boton {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    background: var(--texto);
+    color: var(--fondo);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .boton.claro {
+    background: var(--fondo);
+    color: var(--texto);
+  }
+
+  .titular {
+    margin: 2rem 0 1.5rem;
+    font-size: clamp(3rem, 13vw, 11rem);
+    font-weight: 700;
+    letter-spacing: -0.06em;
+    line-height: 0.9;
+    text-align: center;
+    text-wrap: balance;
+  }
+  .regla {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--borde);
+    color: var(--tenue);
+    font-size: 0.75rem;
+  }
+  .intro {
+    max-width: 42rem;
+    margin: 4rem auto;
+    font-size: clamp(1.25rem, 2.6vw, 2rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    text-align: center;
+    text-wrap: balance;
+  }
+  .intro::before {
+    content: '[ ';
+  }
+  .intro::after {
+    content: ' ]';
+  }
+
+  /* Texto corrido a ancho de lectura; .ancha lo libera para las filas. */
+  main > :where(p, ul, ol, dl, h2) {
+    max-width: 44rem;
+    margin-inline: auto;
+  }
+  main > .regla + :where(p, h2) {
+    margin-top: 3rem;
+  }
+  main > h2 {
+    margin-top: 3rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--borde);
+    font-size: 1.25rem;
+    letter-spacing: -0.02em;
+  }
+  .ancha {
+    max-width: none;
+  }
+  .fila {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 0.5rem 2rem;
+    padding-block: 1.5rem;
+    border-top: 1px solid var(--borde);
+  }
+  .fila > * {
+    margin: 0;
+  }
+  @media (max-width: 40rem) {
+    .fila {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  footer {
+    margin-top: 6rem;
+    padding-top: 4rem;
+    overflow: hidden;
+    background: var(--texto);
+    color: var(--fondo);
+  }
+  .cierre,
+  .columnas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+  .pregunta {
+    margin: 0 0 1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+  .correo {
+    font-size: clamp(1.5rem, 4vw, 3rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    overflow-wrap: anywhere;
+    text-underline-offset: 0.15em;
+  }
+  .columnas {
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--tenue);
+    color: var(--tenue-oscuro);
+    font-size: 0.875rem;
+  }
+  .columnas ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .columnas strong {
+    color: var(--fondo);
+  }
+  address {
+    font-style: normal;
+  }
+  .rotulo {
+    margin: 3rem 0 0;
+    font-size: clamp(4rem, 19vw, 17rem);
+    font-weight: 700;
+    letter-spacing: -0.06em;
+    line-height: 0.8;
+    text-align: center;
+    white-space: nowrap;
+  }
+</style>

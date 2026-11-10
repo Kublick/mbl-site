@@ -1,0 +1,59 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site, operador } from '../site';
+---
+
+<Layout titulo="Términos y condiciones" descripcion={`Términos y condiciones de ${site.marca}.`}>
+  <p>Última actualización: {site.actualizado}</p>
+
+  <h2>Quién presta el servicio</h2>
+  <p>{operador}, con domicilio en {site.domicilio}.</p>
+
+  <h2>Servicios</h2>
+  <p>
+    {site.marca} presta servicios de desarrollo de software. El alcance, los entregables, los plazos
+    y el precio de cada proyecto se definen en una cotización aceptada por escrito por el cliente.
+    Lo acordado en la cotización prevalece sobre estos términos.
+  </p>
+
+  <h2>Pagos</h2>
+  <p>
+    Los precios se expresan en pesos mexicanos. La forma y las fechas de pago se indican en la
+    cotización. Se emite factura (CFDI) por cada pago.
+  </p>
+
+  <h2>Cancelaciones y devoluciones</h2>
+  <p>
+    El cliente puede cancelar un proyecto en cualquier momento avisando por escrito. Se cobra el
+    trabajo realizado hasta la fecha de cancelación y se devuelve cualquier anticipo que lo exceda.
+  </p>
+
+  <h2>Propiedad intelectual</h2>
+  <p>
+    Una vez liquidado el proyecto, el cliente es titular de los entregables hechos a su medida. Las
+    herramientas y componentes de terceros conservan sus propias licencias.
+  </p>
+
+  <h2>Responsabilidad</h2>
+  <p>
+    La responsabilidad de {site.marca} se limita al monto pagado por el servicio que originó la
+    reclamación. No se responde por fallas de servicios de terceros como alojamiento, plataformas de
+    mensajería o redes sociales.
+  </p>
+
+  <h2>Datos personales</h2>
+  <p>
+    El tratamiento de datos personales se rige por el <a href="/privacidad/">Aviso de privacidad</a>.
+  </p>
+
+  <h2>Ley aplicable</h2>
+  <p>
+    Estos términos se rigen por las leyes de los Estados Unidos Mexicanos. Cualquier controversia se
+    someterá a los tribunales competentes del domicilio del prestador.
+  </p>
+
+  <h2>Contacto</h2>
+  <p>
+    Dudas sobre estos términos: <a href={`mailto:${site.correo}`}>{site.correo}</a>.
+  </p>
+</Layout>

@@ -1,0 +1,78 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site, operador } from '../site';
+---
+
+<Layout titulo="Aviso de privacidad" descripcion={`Aviso de privacidad de ${site.marca}.`}>
+  <p>Última actualización: {site.actualizado}</p>
+
+  <h2>Responsable</h2>
+  <p>
+    {operador}, con domicilio en {site.domicilio}, es responsable del tratamiento de sus datos
+    personales, conforme a la Ley Federal de Protección de Datos Personales en Posesión de los
+    Particulares.
+  </p>
+
+  <h2>Datos que se recaban</h2>
+  <ul>
+    <li>Identificación y contacto: nombre, teléfono y correo electrónico.</li>
+    <li>Datos del negocio del cliente necesarios para cotizar y prestar el servicio.</li>
+    <li>Datos de facturación: nombre o razón social, RFC y domicilio fiscal.</li>
+    <li>El contenido de los mensajes que usted envía por correo, teléfono o WhatsApp.</li>
+  </ul>
+  <p>No se recaban datos personales sensibles.</p>
+
+  <h2>Finalidades</h2>
+  <p>Finalidades necesarias:</p>
+  <ul>
+    <li>Responder solicitudes y elaborar cotizaciones.</li>
+    <li>Prestar los servicios contratados y dar soporte.</li>
+    <li>Facturar y cobrar.</li>
+    <li>Cumplir obligaciones legales y fiscales.</li>
+  </ul>
+  <p>
+    Finalidad secundaria: enviar información sobre servicios de {site.marca}. Puede negarse a esta
+    finalidad en cualquier momento escribiendo a <a href={`mailto:${site.correo}`}>{site.correo}</a>.
+  </p>
+
+  <h2>Datos obtenidos mediante productos de Meta</h2>
+  <p>
+    Cuando usted interactúa con {site.marca} a través de Facebook, Instagram o WhatsApp, se reciben
+    los datos que esas plataformas comparten según los permisos que usted otorga, como su nombre de
+    perfil, su número de teléfono y el contenido de los mensajes. Estos datos se usan solo para
+    atender su solicitud y prestar el servicio; no se venden ni se usan para fines distintos. Puede
+    pedir su eliminación como se indica en
+    <a href="/eliminacion-de-datos/">Eliminación de datos</a>.
+  </p>
+
+  <h2>Transferencias</h2>
+  <p>
+    Sus datos no se transfieren a terceros sin su consentimiento, salvo las excepciones previstas en
+    la ley. Se comparten con proveedores que actúan como encargados (alojamiento, correo electrónico,
+    mensajería y facturación) únicamente para prestar el servicio.
+  </p>
+
+  <h2>Derechos ARCO y revocación del consentimiento</h2>
+  <p>
+    Usted puede acceder a sus datos, rectificarlos, cancelarlos u oponerse a su tratamiento, así
+    como revocar su consentimiento, enviando una solicitud a
+    <a href={`mailto:${site.correo}`}>{site.correo}</a> con:
+  </p>
+  <ul>
+    <li>Su nombre completo y un medio para comunicarle la respuesta.</li>
+    <li>Un documento que acredite su identidad o la de su representante.</li>
+    <li>La descripción clara de los datos y del derecho que desea ejercer.</li>
+  </ul>
+  <p>
+    Se le responderá en un plazo máximo de 20 días hábiles. Si la solicitud procede, se hará
+    efectiva dentro de los 15 días hábiles siguientes.
+  </p>
+
+  <h2>Cookies</h2>
+  <p>Este sitio no usa cookies ni tecnologías de rastreo.</p>
+
+  <h2>Cambios a este aviso</h2>
+  <p>
+    Cualquier cambio se publicará en esta página con su fecha de actualización.
+  </p>
+</Layout>
