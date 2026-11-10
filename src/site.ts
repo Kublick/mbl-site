@@ -2,11 +2,11 @@
 // con la Constancia de Situación Fiscal y con "Información del negocio" en Meta.
 export const site = {
   marca: 'MBL-DEV',
-  nombreLegal: 'Jose Max Blancarte',
+  nombreLegal: 'Jose Max Blancarte Lopez',
   telefono: '686 248 4533',
   telefonoHref: 'tel:+526862484533',
   correo: 'blancarte@gmail.com',
-  domicilio: 'Montes Azules 2092, Mexicali BC',
+  domicilio: 'Calle Montes Azules 2092, Reserva Residencial, 21225 Mexicali, Baja California',
   // Código de Meta > Seguridad de la marca > Dominios. Vacío = no se emite la metaetiqueta.
   metaDomainVerification: '',
   actualizado: '10 de noviembre de 2026',
